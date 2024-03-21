@@ -1,6 +1,6 @@
 package com.primo.domain
 
-data class FeedEntity(var title: String, var feedItem: MutableList<FeedDetail>)
+data class FeedUIModel(var title: String, var logo: String, var feedList: List<FeedDetail>)
 
 
 data class FeedDetail(
@@ -8,7 +8,7 @@ data class FeedDetail(
     val title: String,
     var dateTime: String,
     var content: String,
-    var category: String,
+    var category: List<String>,
     var link: String,
     var creator: String
 ) {

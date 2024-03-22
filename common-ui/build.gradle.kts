@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.primo.feature"
+    namespace = "com.primo.common_ui"
     compileSdk = 34
 
     defaultConfig {
@@ -40,17 +40,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
-    implementation(project(":data"))
-    implementation(project(":domain"))
-    implementation(project(":model"))
-    implementation(project(":common-ui"))
-
-    implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.material3)
-    implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.navigation)
@@ -59,15 +51,4 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.coil)
 
-    implementation(libs.bundles.koin.lib)
-    implementation(libs.bundles.api.service)
-    implementation(libs.bundles.kotlin.coroutines)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
 }

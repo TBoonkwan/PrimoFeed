@@ -1,4 +1,4 @@
-package com.primo.feature.ui
+package com.primo.feature.presentation.detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -13,11 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import com.primo.feature.theme.AppTypography
+import com.primo.common_ui.theme.AppTypography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeedDetailScreen(navController: NavHostController) {
+
     Scaffold(topBar = {
         TopAppBar(
             navigationIcon = {

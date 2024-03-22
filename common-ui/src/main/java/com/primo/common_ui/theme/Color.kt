@@ -1,4 +1,4 @@
-package com.primo.feature.theme
+package com.primo.common_ui.theme
 
 import androidx.compose.ui.graphics.Color
 

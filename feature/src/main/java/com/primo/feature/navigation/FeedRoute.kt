@@ -5,9 +5,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.primo.domain.FeedDetail
-import com.primo.feature.ui.FeedDetailScreen
-import com.primo.feature.ui.FeedMainScreen
+import com.primo.domain.entity.FeedDetail
+import com.primo.feature.presentation.detail.FeedDetailScreen
+import com.primo.feature.presentation.main.FeedMainScreen
 
 enum class FeedRoute(val destination: String) {
     FEED_MAIN("feed_main"),
@@ -21,7 +21,9 @@ fun NavGraphBuilder.feedNavigationBuilder(navController: NavHostController) {
     composable(
         route = FeedRoute.FEED_MAIN.destination,
     ) {
-        FeedMainScreen(navController = navController)
+        FeedMainScreen { data ->
+            navController.navigateToFeedDetail(feedDetail = data)
+        }
     }
     composable(
         route = FeedRoute.FEED_DETAIL.destination,

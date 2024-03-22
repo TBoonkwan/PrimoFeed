@@ -1,4 +1,4 @@
-package com.primo.feature.shared
+package com.primo.common_ui.component
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.AnimationSpec

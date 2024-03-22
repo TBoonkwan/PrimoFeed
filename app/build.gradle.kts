@@ -56,6 +56,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":model"))
     implementation(project(":feature"))
+    implementation(project(":common-ui"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)

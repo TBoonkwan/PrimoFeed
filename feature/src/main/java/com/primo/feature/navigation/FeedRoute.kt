@@ -36,11 +36,11 @@ fun NavGraphBuilder.feedScreen(navController: NavHostController) {
     composable(
         route = "${FeedRoute.FEED.destination}?${FEED_PARAMS}={${FEED_ID}}",
         arguments = listOf(navArgument(FEED_ID) {
-            type = NavType.StringType
+            type = NavType.IntType
         })
     ) {
-        val feedId = it.arguments?.getString(FEED_ID)
-        FeedDetailScreen(feedId = feedId.orEmpty()) {
+        val feedId = it.arguments?.getInt(FEED_ID, -1)
+        FeedDetailScreen(feedId = feedId) {
             navController.popBackStack()
         }
     }

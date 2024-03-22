@@ -11,7 +11,6 @@ fun RssChannel?.mapToFeed(): FeedResponse {
     rssFeed?.items?.forEach {
         feedItems.add(
             FeedItem(
-                id = it.guid.toString(),
                 title = it.title,
                 pubDate = it.pubDate,
                 author = it.author,

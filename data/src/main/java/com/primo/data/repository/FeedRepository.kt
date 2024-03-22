@@ -4,5 +4,6 @@ import com.primo.model.FeedResponse
 import kotlinx.coroutines.flow.Flow
 
 interface FeedRepository {
-    fun getFeedList(): Flow<Result<FeedResponse>>
+    suspend fun getFeedList(): Flow<Result<FeedResponse>>
+    fun sync(): Flow<Result<FeedResponse>>
 }

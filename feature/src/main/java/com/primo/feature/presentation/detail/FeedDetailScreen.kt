@@ -16,7 +16,7 @@ import com.primo.common_ui.theme.AppTypography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FeedDetailScreen(feedId: String, onClickBack: () -> Unit) {
+fun FeedDetailScreen(feedId: Int?, onClickBack: () -> Unit) {
 
     Scaffold(topBar = {
         TopAppBar(

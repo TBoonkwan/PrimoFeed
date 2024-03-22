@@ -37,7 +37,10 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":model"))
+
     implementation(libs.core.ktx)
+    implementation(libs.gson)
+    implementation(libs.lifecycle.runtime.ktx)
 
     implementation(libs.bundles.koin.lib)
     implementation(libs.bundles.kotlin.coroutines)

@@ -18,7 +18,7 @@ class FeedMapper : Mapper<FeedResponse, FeedUIModel> {
             val date = Date.parse(it.pubDate.orEmpty())
             feedDetail.add(
                 FeedDetail(
-                    id = it.id,
+                    id = it.id ?: -1,
                     title = it.title.orEmpty(),
                     pubDate = simpleDateFormat.format(date),
                     author = it.author.orEmpty(),

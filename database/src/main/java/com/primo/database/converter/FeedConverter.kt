@@ -1,20 +1,19 @@
-package com.primo.data.converter
+package com.primo.database.converter
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.primo.core.fromJson
-import com.primo.model.FeedResponse
 
 class FeedConverter {
     @TypeConverter
-    fun fromStringArrayList(value: List<FeedResponse>): String {
+    fun fromStringArrayList(value: List<String>): String {
         return Gson().toJson(value)
     }
 
     @TypeConverter
-    fun toStringArrayList(value: String): List<FeedResponse> {
+    fun toStringArrayList(value: String): List<String> {
         return try {
-            Gson().fromJson<List<FeedResponse>>(value) //using extension function
+            Gson().fromJson<List<String>>(value) //using extension function
         } catch (e: Exception) {
             arrayListOf()
         }

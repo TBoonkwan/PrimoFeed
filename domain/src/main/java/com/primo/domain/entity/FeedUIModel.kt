@@ -13,7 +13,7 @@ data class FeedUIModel(
 
 @Parcelize
 data class FeedDetail(
-    var id : String,
+    var id : Int,
     var image: String,
     val title: String,
     var pubDate: String,

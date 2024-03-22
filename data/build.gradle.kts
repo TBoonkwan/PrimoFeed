@@ -36,6 +36,7 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":model"))
+    implementation(project(":database"))
 
     implementation(libs.core.ktx)
     implementation(libs.bundles.api.service)

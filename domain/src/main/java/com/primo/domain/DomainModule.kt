@@ -6,7 +6,7 @@ import com.primo.domain.usecase.GetMediumFeedListUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
-    single {
+    factory {
         FeedMapper()
     }
     factory<GetFeedListUseCase> {

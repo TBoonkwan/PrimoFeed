@@ -7,10 +7,10 @@ import com.primo.data.source.remote.RemoteFeedDataSource
 import org.koin.dsl.module
 
 val dataModule = module {
-    single { LocalFeedDataSource(feedDao = get()) }
-    single { RemoteFeedDataSource() }
+    factory { LocalFeedDataSource(feedDao = get()) }
+    factory { RemoteFeedDataSource() }
 
-    single<FeedRepository> {
+    factory<FeedRepository> {
         MediumFeedRepository(
             localFeedDataSource = get(),
             remoteFeedDataSource = get()

@@ -7,12 +7,12 @@ import com.primo.model.FeedItem
 import com.primo.model.FeedResponse
 
 class LocalFeedDataSource(private val feedDao: FeedDao) {
-    suspend fun getFeedList(): FeedResponse {
+    suspend fun getFeedList(): Result<FeedResponse> {
         val profile = feedDao.getProfile()
         val feed = feedDao.getFeed()
 
         if (profile.isEmpty() && feed.isEmpty()) {
-            return FeedResponse(title = "", image = "", items = listOf())
+            return Result.failure(NullPointerException())
         }
 
         val temp: MutableList<FeedItem> = mutableListOf()
@@ -30,18 +30,23 @@ class LocalFeedDataSource(private val feedDao: FeedDao) {
                 )
             )
         }
-        return FeedResponse(
-            title = profile.first().title, image = profile.first().image, items = temp
+
+        return Result.success(
+            FeedResponse(
+                title = profile.first().title, image = profile.first().image, items = temp
+            )
         )
     }
 
-    suspend fun saveFeedList(feedResponse: FeedResponse) {
-        feedDao.insertProfile(
-            Profile(
-                title = feedResponse.title,
-                image = feedResponse.image,
+    suspend fun saveFeedList(feedResponse: FeedResponse): Result<FeedResponse> {
+        if (feedDao.getProfile().isEmpty()) {
+            feedDao.insertProfile(
+                Profile(
+                    title = feedResponse.title,
+                    image = feedResponse.image,
+                )
             )
-        )
+        }
 
         val profile = feedDao.getProfile()
 
@@ -58,5 +63,7 @@ class LocalFeedDataSource(private val feedDao: FeedDao) {
             )
             feedDao.insertFeed(feed)
         }
+
+        return getFeedList()
     }
 }

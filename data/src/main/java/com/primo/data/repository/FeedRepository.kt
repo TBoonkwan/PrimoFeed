@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface FeedRepository {
     suspend fun getFeedList(): Flow<Result<FeedResponse>>
-    fun sync(): Flow<Result<FeedResponse>>
+    fun refreshFeed(): Flow<Result<FeedResponse>>
 }

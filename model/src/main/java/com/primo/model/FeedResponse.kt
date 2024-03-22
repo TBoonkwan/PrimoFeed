@@ -7,6 +7,7 @@ data class FeedResponse(
 )
 
 data class FeedItem(
+    var id : String,
     var image: String?,
     val title: String?,
     var pubDate: String?,

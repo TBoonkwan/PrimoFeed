@@ -4,30 +4,44 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.primo.domain.entity.FeedDetail
 import com.primo.feature.presentation.detail.FeedDetailScreen
 import com.primo.feature.presentation.main.FeedMainScreen
 
 enum class FeedRoute(val destination: String) {
-    FEED_MAIN("feed_main"),
-    FEED_DETAIL("feed_detail")
+    FEED("feed"),
 }
 
-fun NavController.navigateToFeedDetail(feedDetail: FeedDetail, options: NavOptions? = null) =
-    navigate(route = FeedRoute.FEED_DETAIL.destination, navOptions = options)
+const val FEED_PARAMS = "id"
+const val FEED_ID = "feedId"
 
-fun NavGraphBuilder.feedNavigationBuilder(navController: NavHostController) {
+fun NavController.navigateToFeedDetail(feedDetail: FeedDetail, options: NavOptions? = null) =
+    navigate(
+        route = "${FeedRoute.FEED.destination}?${FEED_PARAMS}=${feedDetail.id}",
+        navOptions = options
+    )
+
+fun NavGraphBuilder.feedScreen(navController: NavHostController) {
     composable(
-        route = FeedRoute.FEED_MAIN.destination,
+        route = FeedRoute.FEED.destination,
     ) {
         FeedMainScreen { data ->
             navController.navigateToFeedDetail(feedDetail = data)
         }
     }
+
     composable(
-        route = FeedRoute.FEED_DETAIL.destination,
+        route = "${FeedRoute.FEED.destination}?${FEED_PARAMS}={${FEED_ID}}",
+        arguments = listOf(navArgument(FEED_ID) {
+            type = NavType.StringType
+        })
     ) {
-        FeedDetailScreen(navController = navController)
+        val feedId = it.arguments?.getString(FEED_ID)
+        FeedDetailScreen(feedId = feedId.orEmpty()) {
+            navController.popBackStack()
+        }
     }
 }

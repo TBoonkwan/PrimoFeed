@@ -3,6 +3,7 @@ package com.primo.data.extension
 import com.primo.model.FeedItem
 import com.primo.model.FeedResponse
 import com.prof18.rssparser.model.RssChannel
+import kotlin.random.Random
 
 fun RssChannel?.mapToFeed(): FeedResponse {
     val rssFeed = this
@@ -11,6 +12,7 @@ fun RssChannel?.mapToFeed(): FeedResponse {
     rssFeed?.items?.forEach {
         feedItems.add(
             FeedItem(
+                id = it.guid.toString(),
                 title = it.title,
                 pubDate = it.pubDate,
                 author = it.author,

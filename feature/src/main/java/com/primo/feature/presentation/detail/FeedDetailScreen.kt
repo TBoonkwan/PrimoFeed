@@ -12,18 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
 import com.primo.common_ui.theme.AppTypography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FeedDetailScreen(navController: NavHostController) {
+fun FeedDetailScreen(feedId: String, onClickBack: () -> Unit) {
 
     Scaffold(topBar = {
         TopAppBar(
             navigationIcon = {
                 IconButton(onClick = {
-                    navController.popBackStack()
+                    onClickBack.invoke()
                 }) {
                     Icon(
                         painter = painterResource(com.google.android.material.R.drawable.ic_arrow_back_black_24),

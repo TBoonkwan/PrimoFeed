@@ -14,6 +14,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
@@ -33,12 +35,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.google.android.material.R
 import com.primo.common_ui.component.FlexibleTopBar
 import com.primo.common_ui.component.LoadingIndicator
 import com.primo.common_ui.component.TryAgainButton
@@ -232,9 +236,10 @@ fun FeedItem(
                 modifier = Modifier.weight(1f),
                 text = feedDetail.title,
                 style = AppTypography.titleLarge,
-                maxLines = 2,
+                maxLines = 3,
                 overflow = TextOverflow.Ellipsis
             )
+            Spacer(modifier = Modifier.padding(horizontal = 16.dp),)
             AsyncImage(
                 model = feedDetail.image,
                 contentDescription = feedDetail.image,

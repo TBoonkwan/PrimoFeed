@@ -43,6 +43,9 @@ dependencies {
     implementation(libs.bundles.koin.lib)
     implementation(libs.bundles.kotlin.coroutines)
 
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
 }

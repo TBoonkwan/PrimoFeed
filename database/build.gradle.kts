@@ -2,10 +2,11 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.primo.core"
+    namespace = "com.primo.database"
     compileSdk = 34
 
     defaultConfig {
@@ -34,12 +35,14 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":core"))
+    implementation(project(":model"))
     implementation(libs.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.gson)
 
+    implementation(libs.bundles.koin.lib)
+    implementation(libs.bundles.kotlin.coroutines)
+
+    implementation(libs.bundles.room.database)
+    ksp(libs.room.compiler)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
 }

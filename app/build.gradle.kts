@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.parcelize)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -57,6 +58,7 @@ dependencies {
     implementation(project(":model"))
     implementation(project(":feature"))
     implementation(project(":common-ui"))
+    implementation(project(":database"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
@@ -72,6 +74,9 @@ dependencies {
     implementation(libs.bundles.api.service)
     implementation(libs.bundles.koin.lib)
     implementation(libs.bundles.kotlin.coroutines)
+
+    implementation(libs.bundles.room.database)
+    ksp(libs.room.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

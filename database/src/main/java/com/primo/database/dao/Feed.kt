@@ -23,6 +23,8 @@ interface FeedDao {
     suspend fun insertFeed(feed: Feed)
     @Query("SELECT * FROM profile")
     suspend fun getProfile(): List<Profile>
+    @Query("SELECT * FROM profile WHERE id IN (:profileId)")
+    suspend fun getProfileById(profileId : Int): Profile
 
     @Insert
     suspend fun insertProfile(profile: Profile)

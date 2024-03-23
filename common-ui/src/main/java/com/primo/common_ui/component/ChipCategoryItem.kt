@@ -15,7 +15,7 @@ fun ChipCategoryItem(modifier: Modifier = Modifier, text: String) {
         modifier = modifier
             .background(
                 color = Color.LightGray,
-                shape = RoundedCornerShape(24.dp)
+                shape = RoundedCornerShape(20.dp)
             )
             .padding(horizontal = 12.dp, vertical = 8.dp), text = text
     )

@@ -16,7 +16,7 @@ class MediumFeedRepository(
     override suspend fun getFeedList(): Flow<Result<FeedResponse>> =
         flowOf(localFeedDataSource.getFeedList())
 
-    override suspend fun getFeedById(feedId: Int): Flow<Result<FeedItem>> =
+    override suspend fun getFeedById(feedId: Int): Flow<Result<FeedResponse>> =
         flowOf(localFeedDataSource.getFeedDetail(feedId = feedId))
 
     override fun refreshFeed(): Flow<Result<FeedResponse>> {

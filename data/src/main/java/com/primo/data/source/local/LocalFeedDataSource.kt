@@ -38,18 +38,25 @@ class LocalFeedDataSource(private val feedDao: FeedDao) {
         )
     }
 
-    suspend fun getFeedDetail(feedId: Int): Result<FeedItem> {
+    suspend fun getFeedDetail(feedId: Int): Result<FeedResponse> {
         val feed = feedDao.getFeedById(feedId)
+        val profile = feedDao.getProfileById(feed.profileId ?: -1)
         return Result.success(
-            FeedItem(
-                id = feed.id ?: -1,
-                image = feed.image,
-                title = feed.title,
-                categories = feed.categories,
-                pubDate = feed.pubDate,
-                author = feed.author,
-                content = feed.content,
-                link = feed.link,
+            FeedResponse(
+                title = profile.title,
+                image = profile.image,
+                items = listOf(
+                    FeedItem(
+                        id = feed.id ?: -1,
+                        image = feed.image,
+                        title = feed.title,
+                        categories = feed.categories,
+                        pubDate = feed.pubDate,
+                        author = feed.author,
+                        content = feed.content,
+                        link = feed.link,
+                    )
+                )
             )
         )
     }

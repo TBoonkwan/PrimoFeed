@@ -2,22 +2,23 @@ package com.primo.domain.mapper
 
 import com.primo.core.Mapper
 import com.primo.domain.entity.FeedDetail
+import com.primo.domain.entity.FeedProfile
 import com.primo.domain.entity.FeedUIModel
 import com.primo.model.FeedResponse
-import java.text.DateFormat
+import com.primo.model.formatMediumFeedProfile
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
 class FeedMapper : Mapper<FeedResponse, FeedUIModel> {
     override fun map(response: FeedResponse): FeedUIModel {
-        val simpleDateFormat = SimpleDateFormat("MMM dd, yyyy" , Locale.ENGLISH)
+        val newProfile = response.formatMediumFeedProfile()
+        val simpleDateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH)
         val feedDetail: MutableList<FeedDetail> = mutableListOf()
         response.items.forEach {
             val date = Date.parse(it.pubDate.orEmpty())
             feedDetail.add(
-                FeedDetail(
+                element = FeedDetail(
                     id = it.id ?: -1,
                     title = it.title.orEmpty(),
                     pubDate = simpleDateFormat.format(date),
@@ -30,8 +31,10 @@ class FeedMapper : Mapper<FeedResponse, FeedUIModel> {
             )
         }
         return FeedUIModel(
-            title = response.title.orEmpty(),
-            logo = response.image.orEmpty(),
+            profile = FeedProfile(
+                title = newProfile,
+                logo = response.image.orEmpty(),
+            ),
             feedList = feedDetail
         )
     }

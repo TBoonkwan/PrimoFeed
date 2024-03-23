@@ -6,14 +6,19 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class FeedUIModel(
-    var title: String = "",
-    var logo: String = "",
+    var profile: FeedProfile,
     var feedList: List<FeedDetail> = listOf()
 ) : Parcelable
 
 @Parcelize
+data class FeedProfile(
+    var title: String = "",
+    var logo: String = "",
+) : Parcelable
+
+@Parcelize
 data class FeedDetail(
-    var id : Int,
+    var id: Int,
     var image: String,
     val title: String,
     var pubDate: String,

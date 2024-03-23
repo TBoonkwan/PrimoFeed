@@ -1,7 +1,7 @@
 package com.primo.domain.usecase
 
 import com.primo.data.repository.FeedRepository
-import com.primo.domain.entity.FeedDetail
+import com.primo.domain.entity.FeedDetailUIModel
 import com.primo.domain.mapper.FeedDetailMapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
 interface GetFeedByIdUseCase {
-    suspend fun execute(feedId: Int): Flow<Result<FeedDetail>>
+    suspend fun execute(feedId: Int): Flow<Result<FeedDetailUIModel>>
 }
 
 class GetMediumFeedByIdUseCase(
@@ -18,7 +18,7 @@ class GetMediumFeedByIdUseCase(
     private val feedMapper: FeedDetailMapper,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : GetFeedByIdUseCase {
-    override suspend fun execute(feedId: Int): Flow<Result<FeedDetail>> {
+    override suspend fun execute(feedId: Int): Flow<Result<FeedDetailUIModel>> {
         return feedRepository.getFeedById(feedId).map { result ->
             if (result.isSuccess) {
                 val feedResponse = result.getOrThrow()

@@ -5,8 +5,9 @@ import com.primo.model.FeedResponse
 import kotlinx.coroutines.flow.Flow
 
 interface FeedRepository {
+
     suspend fun getFeedList(): Flow<Result<FeedResponse>>
-    suspend fun getFeedById(feedId: Int): Flow<Result<FeedItem>>
+    suspend fun getFeedById(feedId: Int): Flow<Result<FeedResponse>>
 
     fun refreshFeed(): Flow<Result<FeedResponse>>
 }

@@ -3,6 +3,7 @@ package com.primo.feature.presentation.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.primo.domain.entity.FeedDetail
+import com.primo.domain.entity.FeedDetailUIModel
 import com.primo.domain.usecase.GetFeedByIdUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 sealed class FeedDetailUIState {
     data object Idle : FeedDetailUIState()
     data object Loading : FeedDetailUIState()
-    data class Success(val feedDetail: FeedDetail) : FeedDetailUIState()
+    data class Success(val feedDetail: FeedDetailUIModel) : FeedDetailUIState()
     data object Error : FeedDetailUIState()
 }
 

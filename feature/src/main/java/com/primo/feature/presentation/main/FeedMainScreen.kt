@@ -47,6 +47,7 @@ import com.primo.common_ui.component.TryAgainButton
 import com.primo.common_ui.theme.AppTypography
 import com.primo.domain.entity.FeedDetail
 import com.primo.domain.entity.FeedUIModel
+import com.primo.domain.entity.FeedProfile
 import com.primo.feature.navigation.navigateToFeedDetail
 import org.koin.androidx.compose.koinViewModel
 
@@ -102,17 +103,17 @@ fun FeedAppBar(scrollBehavior: TopAppBarScrollBehavior, feedUIModel: FeedUIModel
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
-                model = feedUIModel.logo,
+                model = feedUIModel.profile.logo,
                 modifier = Modifier
                     .size(64.dp)
                     .clip(CircleShape),
-                contentDescription = feedUIModel.logo,
+                contentDescription = feedUIModel.profile.logo,
             )
             Spacer(modifier = Modifier.width(8.dp))
 
             Column {
                 Text(
-                    text = feedUIModel.title, style = AppTypography.headlineLarge,
+                    text = feedUIModel.profile.title, style = AppTypography.headlineLarge,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -197,7 +198,7 @@ fun TabItem(title: String, index: Int, selectedTabIndex: Int, onClicked: (Int) -
 fun FeedList(feedUIModel: FeedUIModel, onClick: (FeedDetail) -> Unit) {
     LazyColumn {
         items(feedUIModel.feedList) { item ->
-            FeedItem(modifier = Modifier, logo = feedUIModel.logo, feedDetail = item) {
+            FeedItem(modifier = Modifier, logo = feedUIModel.profile.logo, feedDetail = item) {
                 onClick.invoke(item)
             }
         }
@@ -281,8 +282,10 @@ fun FeedMainContentPreview() {
     }
 
     val mockFeedUIModel = FeedUIModel(
-        title = "Vee PRIMO",
-        logo = "https://cdn-images-1.medium.com/fit/c/150/150/1*JMzV3TIO6u-UIJS5jIUMQA.png",
+        profile = FeedProfile(
+            title = "Vee PRIMO",
+            logo = "https://cdn-images-1.medium.com/fit/c/150/150/1*JMzV3TIO6u-UIJS5jIUMQA.png",
+        ),
         feedList = mockFeedList
     )
 

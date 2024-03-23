@@ -46,8 +46,8 @@ import com.primo.common_ui.component.LoadingIndicator
 import com.primo.common_ui.component.TryAgainButton
 import com.primo.common_ui.theme.AppTypography
 import com.primo.domain.entity.FeedDetail
-import com.primo.domain.entity.FeedUIModel
 import com.primo.domain.entity.FeedProfile
+import com.primo.domain.entity.FeedUIModel
 import com.primo.feature.navigation.navigateToFeedDetail
 import org.koin.androidx.compose.koinViewModel
 
@@ -57,11 +57,14 @@ fun FeedMainScreen(
     viewModel: FeedMainViewModel = koinViewModel(),
     onNavigateToFeedDetail: (FeedDetail) -> Unit,
 ) {
-    LaunchedEffect("getFeedList") {
-        viewModel.getFeedList()
-    }
 
     val uiState: FeedUIState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(uiState) {
+        if (uiState is FeedUIState.Idle) {
+            viewModel.getFeedList()
+        }
+    }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 

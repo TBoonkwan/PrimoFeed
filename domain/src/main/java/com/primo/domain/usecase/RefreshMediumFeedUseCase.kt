@@ -9,17 +9,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
-interface GetFeedListUseCase {
+interface RefreshFeedUseCase {
     suspend fun execute(): Flow<Result<FeedUIModel>>
 }
 
-class GetMediumFeedListUseCase(
+class RefreshMediumFeedUseCase(
     private val feedRepository: FeedRepository,
     private val feedMapper: FeedMapper,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
-) : GetFeedListUseCase {
+) : RefreshFeedUseCase {
     override suspend fun execute(): Flow<Result<FeedUIModel>> {
-        return feedRepository.getFeedList().map {
+        return feedRepository.refreshFeed().map {
             if (it.isSuccess) {
                 Result.success(feedMapper.map(it.getOrThrow()))
             } else {

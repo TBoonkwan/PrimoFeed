@@ -38,6 +38,22 @@ class LocalFeedDataSource(private val feedDao: FeedDao) {
         )
     }
 
+    suspend fun getFeedDetail(feedId: Int): Result<FeedItem> {
+        val feed = feedDao.getFeedById(feedId)
+        return Result.success(
+            FeedItem(
+                id = feed.id ?: -1,
+                image = feed.image,
+                title = feed.title,
+                categories = feed.categories,
+                pubDate = feed.pubDate,
+                author = feed.author,
+                content = feed.content,
+                link = feed.link,
+            )
+        )
+    }
+
     suspend fun saveFeedList(feedResponse: FeedResponse): Result<FeedResponse> {
         if (feedDao.getProfile().isEmpty()) {
             feedDao.insertProfile(

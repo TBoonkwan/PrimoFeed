@@ -16,6 +16,8 @@ interface FeedDao {
     fun hasFeed(): Boolean
     @Query("SELECT * FROM feed")
     suspend fun getFeed(): List<Feed>
+    @Query("SELECT * FROM feed WHERE id IN (:feedId)")
+    suspend fun getFeedById(feedId: Int): Feed
 
     @Insert
     suspend fun insertFeed(feed: Feed)

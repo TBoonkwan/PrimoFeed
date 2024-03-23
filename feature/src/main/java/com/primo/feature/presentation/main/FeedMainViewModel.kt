@@ -3,9 +3,8 @@ package com.primo.feature.presentation.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.primo.domain.entity.FeedUIModel
-import com.primo.domain.usecase.GetLocalFeedListUseCase
-import com.primo.domain.usecase.GetNewFeedListUseCase
-import kotlinx.coroutines.Dispatchers
+import com.primo.domain.usecase.GetFeedListUseCase
+import com.primo.domain.usecase.RefreshFeedUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,8 +25,8 @@ sealed class FeedUIState {
 }
 
 class FeedMainViewModel(
-    private val getFeedListUseCase: GetLocalFeedListUseCase,
-    private val refreshFeedListUseCase: GetNewFeedListUseCase,
+    private val getFeedListUseCase: GetFeedListUseCase,
+    private val refreshFeedListUseCase: RefreshFeedUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<FeedUIState>(FeedUIState.Idle)
@@ -39,7 +38,7 @@ class FeedMainViewModel(
             FeedUIState.Loading
         }
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             getFeedListUseCase.execute().map { result ->
                 updateUI(result = result, remote = false)
             }.catch {
